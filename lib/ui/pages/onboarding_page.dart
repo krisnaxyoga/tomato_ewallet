@@ -1,4 +1,6 @@
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/pages/sign_in_page.dart';
+import 'package:bank_sha/ui/widgets/button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -94,24 +96,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     currentIndex == 2
                         ? Column(
                             children: [
-                              SizedBox(
-                                width: double.infinity,
-                                height: 45,
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: purpleColor,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(56))),
-                                  onPressed: () {
-                                    carouselController.nextPage();
-                                  },
-                                  child: Text(
-                                    'Get Started',
-                                    style: whiteTextStyle.copyWith(
-                                        fontSize: 15, fontWeight: medium),
-                                  ),
-                                ),
+                              CustomsFilledButton(
+                                title: 'Get Start',
+                                onPressed: () {},
                               ),
                               const SizedBox(
                                 height: 20,
@@ -122,7 +109,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 child: TextButton(
                                   style: TextButton.styleFrom(
                                       padding: EdgeInsets.zero),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignInPage(),
+                                      ),
+                                    );
+                                  },
                                   child: Text(
                                     'Sign in',
                                     style: greyTextStyle.copyWith(fontSize: 14),
@@ -164,25 +159,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                         : lightBackgoundColor),
                               ),
                               const Spacer(),
-                              SizedBox(
+                              CustomsFilledButton(
+                                title: 'Continue',
+                                onPressed: () {
+                                  carouselController.nextPage();
+                                },
                                 width: 125,
                                 height: 45,
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: purpleColor,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(56))),
-                                  onPressed: () {
-                                    carouselController.nextPage();
-                                  },
-                                  child: Text(
-                                    'continue',
-                                    style: whiteTextStyle.copyWith(
-                                        fontSize: 15, fontWeight: medium),
-                                  ),
-                                ),
-                              )
+                              ),
                             ],
                           )
                   ],
