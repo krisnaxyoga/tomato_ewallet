@@ -1,6 +1,6 @@
-# bank_sha
+# tomato_ewallet
 
-A new Flutter project.
+A first my Flutter project.
 
 ## Getting Started
 
