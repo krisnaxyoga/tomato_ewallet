@@ -35,17 +35,17 @@ class CustomsFilledButton extends StatelessWidget {
   }
 }
 
-class CustomsTextWidget extends StatelessWidget {
+class CustomsTextButton extends StatelessWidget {
   final String title;
   final double width;
   final double height;
   final VoidCallback? onPressed;
 
-  const CustomsTextWidget({
+  const CustomsTextButton({
     super.key,
     required this.title,
     this.width = double.infinity,
-    this.height = 50,
+    this.height = 24,
     this.onPressed,
   });
 
@@ -56,7 +56,7 @@ class CustomsTextWidget extends StatelessWidget {
       height: height,
       child: TextButton(
         style: TextButton.styleFrom(padding: EdgeInsets.zero),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           title,
           style: greyTextStyle.copyWith(fontSize: 14),

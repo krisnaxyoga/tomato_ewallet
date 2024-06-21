@@ -3,8 +3,8 @@ import 'package:bank_sha/ui/widgets/button.dart';
 import 'package:bank_sha/ui/widgets/form.dart';
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class SignInPage extends StatelessWidget {
               ),
             ),
             Text(
-              'Sign In &\nGrow Your Finance',
+              'Join Us to Unlock\nYour Growth',
               style: blackTextStyle.copyWith(
                 fontSize: 18,
                 fontWeight: bold,
@@ -48,6 +48,10 @@ class SignInPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const CustomsFormField(title: 'Full Name'),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   // NOTE: EMAIL INPUT
                   const CustomsFormField(title: 'Email Address'),
                   const SizedBox(
@@ -59,26 +63,12 @@ class SignInPage extends StatelessWidget {
                     obscureText: true,
                   ),
                   const SizedBox(
-                    height: 8,
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      'Forget Password',
-                      style: blueTextStyle,
-                    ),
-                  ),
-                  const SizedBox(
                     height: 30,
                   ),
                   CustomsFilledButton(
-                    title: 'Sign in',
+                    title: 'Continue',
                     onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        '/home',
-                        (route) => false,
-                      );
+                      Navigator.pushNamed(context, '/sign-up-set-profile');
                     },
                     height: 45,
                   ),
@@ -89,9 +79,9 @@ class SignInPage extends StatelessWidget {
               height: 30,
             ),
             CustomsTextButton(
-              title: 'Create New Account',
+              title: 'Sign in',
               onPressed: () {
-                Navigator.pushNamed(context, '/sign-up');
+                Navigator.pushNamed(context, '/sign-in');
               },
             ),
             const SizedBox(

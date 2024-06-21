@@ -98,32 +98,27 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             children: [
                               CustomsFilledButton(
                                 title: 'Get Start',
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    '/sign-up',
+                                    (route) => false,
+                                  );
+                                },
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
-                              SizedBox(
-                                width: double.infinity,
-                                height: 24,
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                      padding: EdgeInsets.zero),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SignInPage(),
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    'Sign in',
-                                    style: greyTextStyle.copyWith(fontSize: 14),
-                                  ),
-                                ),
-                              )
+                              CustomsTextButton(
+                                title: 'Sign in',
+                                onPressed: () {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    '/sign-in',
+                                    (route) => false,
+                                  );
+                                },
+                              ),
                             ],
                           )
                         : Row(
