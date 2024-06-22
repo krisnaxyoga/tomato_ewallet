@@ -9,7 +9,6 @@ class SignUpSetKtpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightBackgoundColor,
       body: Center(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 24),

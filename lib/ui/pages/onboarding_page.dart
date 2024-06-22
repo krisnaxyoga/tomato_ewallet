@@ -29,145 +29,147 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightBackgoundColor,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CarouselSlider(
-                items: [
-                  Image.asset(
-                    'assets/img_onboarding1.png',
-                    height: 250,
-                  ),
-                  Image.asset(
-                    'assets/img_onboarding2.png',
-                    height: 250,
-                  ),
-                  Image.asset(
-                    'assets/img_onboarding3.png',
-                    height: 250,
-                  ),
-                ],
-                options: CarouselOptions(
-                    onPageChanged: (index, reason) => {
-                          setState(() {
-                            currentIndex = index;
-                          })
-                        },
-                    height: 250,
-                    viewportFraction: 1,
-                    enableInfiniteScroll: false),
-                carouselController: carouselController,
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 24),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 22, vertical: 24),
-                decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      titles[currentIndex],
-                      style: blackTextStyle.copyWith(
-                        fontSize: 15,
-                        fontWeight: bold,
-                      ),
-                      textAlign: TextAlign.center,
+      // backgroundColor: lightBackgoundColor,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CarouselSlider(
+                  items: [
+                    Image.asset(
+                      'assets/img_onboarding1.png',
+                      height: 250,
                     ),
-                    const SizedBox(
-                      height: 26,
+                    Image.asset(
+                      'assets/img_onboarding2.png',
+                      height: 250,
                     ),
-                    Text(
-                      subtitles[currentIndex],
-                      style: greyTextStyle.copyWith(fontSize: 14),
-                      textAlign: TextAlign.center,
+                    Image.asset(
+                      'assets/img_onboarding3.png',
+                      height: 250,
                     ),
-                    SizedBox(
-                      height: currentIndex == 2 ? 30 : 40,
-                    ),
-                    currentIndex == 2
-                        ? Column(
-                            children: [
-                              CustomsFilledButton(
-                                title: 'Get Start',
-                                onPressed: () {
-                                  Navigator.pushNamedAndRemoveUntil(
-                                    context,
-                                    '/sign-up',
-                                    (route) => false,
-                                  );
-                                },
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              CustomsTextButton(
-                                title: 'Sign in',
-                                onPressed: () {
-                                  Navigator.pushNamedAndRemoveUntil(
-                                    context,
-                                    '/sign-in',
-                                    (route) => false,
-                                  );
-                                },
-                              ),
-                            ],
-                          )
-                        : Row(
-                            children: [
-                              Container(
-                                width: 10,
-                                height: 10,
-                                margin: const EdgeInsets.only(right: 10),
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: currentIndex == 0
-                                        ? blueColor
-                                        : lightBackgoundColor),
-                              ),
-                              Container(
-                                width: 10,
-                                height: 10,
-                                margin: const EdgeInsets.only(right: 10),
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: currentIndex == 1
-                                        ? blueColor
-                                        : lightBackgoundColor),
-                              ),
-                              Container(
-                                width: 10,
-                                height: 10,
-                                margin: const EdgeInsets.only(right: 10),
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: currentIndex == 2
-                                        ? blueColor
-                                        : lightBackgoundColor),
-                              ),
-                              const Spacer(),
-                              CustomsFilledButton(
-                                title: 'Continue',
-                                onPressed: () {
-                                  carouselController.nextPage();
-                                },
-                                width: 125,
-                                height: 45,
-                              ),
-                            ],
-                          )
                   ],
+                  options: CarouselOptions(
+                      onPageChanged: (index, reason) => {
+                            setState(() {
+                              currentIndex = index;
+                            })
+                          },
+                      height: 250,
+                      viewportFraction: 1,
+                      enableInfiniteScroll: false),
+                  carouselController: carouselController,
                 ),
-              )
-            ],
+                const SizedBox(
+                  height: 60,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 24),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 22, vertical: 24),
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        titles[currentIndex],
+                        style: blackTextStyle.copyWith(
+                          fontSize: 15,
+                          fontWeight: bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 26,
+                      ),
+                      Text(
+                        subtitles[currentIndex],
+                        style: greyTextStyle.copyWith(fontSize: 14),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: currentIndex == 2 ? 30 : 40,
+                      ),
+                      currentIndex == 2
+                          ? Column(
+                              children: [
+                                CustomsFilledButton(
+                                  title: 'Get Start',
+                                  onPressed: () {
+                                    Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      '/sign-up',
+                                      (route) => false,
+                                    );
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                CustomsTextButton(
+                                  title: 'Sign in',
+                                  onPressed: () {
+                                    Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      '/sign-in',
+                                      (route) => false,
+                                    );
+                                  },
+                                ),
+                              ],
+                            )
+                          : Row(
+                              children: [
+                                Container(
+                                  width: 10,
+                                  height: 10,
+                                  margin: const EdgeInsets.only(right: 10),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: currentIndex == 0
+                                          ? blueColor
+                                          : lightBackgoundColor),
+                                ),
+                                Container(
+                                  width: 10,
+                                  height: 10,
+                                  margin: const EdgeInsets.only(right: 10),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: currentIndex == 1
+                                          ? blueColor
+                                          : lightBackgoundColor),
+                                ),
+                                Container(
+                                  width: 10,
+                                  height: 10,
+                                  margin: const EdgeInsets.only(right: 10),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: currentIndex == 2
+                                          ? blueColor
+                                          : lightBackgoundColor),
+                                ),
+                                const Spacer(),
+                                CustomsFilledButton(
+                                  title: 'Continue',
+                                  onPressed: () {
+                                    carouselController.nextPage();
+                                  },
+                                  width: 125,
+                                  height: 45,
+                                ),
+                              ],
+                            )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
