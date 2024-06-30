@@ -97,7 +97,9 @@ class DataProviderPage extends StatelessWidget {
           ),
           CustomsFilledButton(
             title: 'Continue',
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/data-package');
+            },
           ),
           const SizedBox(
             height: 20,
