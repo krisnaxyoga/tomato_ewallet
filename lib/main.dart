@@ -1,4 +1,5 @@
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/pages/data_provider_page.dart';
 import 'package:bank_sha/ui/pages/home_page.dart';
 import 'package:bank_sha/ui/pages/onboarding_page.dart';
 import 'package:bank_sha/ui/pages/pin_page.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           ),
           titleTextStyle: blackTextStyle.copyWith(
             fontSize: 20,
-            fontWeight: bold,
+            fontWeight: semiBold,
           ),
           backgroundColor: lightBackgoundColor,
         ),
@@ -65,6 +66,7 @@ class MyApp extends StatelessWidget {
         '/transfer': (context) => const TransferPage(),
         '/transfer-amount': (context) => const TransferAmountPage(),
         '/transfer-success': (context) => const TransferSuccess(),
+        '/data-provider': (context) => const DataProviderPage(),
       },
     );
   }
