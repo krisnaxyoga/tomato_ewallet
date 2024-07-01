@@ -46,23 +46,23 @@ class DataPackagePage extends StatelessWidget {
           const SizedBox(
             height: 2,
           ),
-          Wrap(spacing: 17, runSpacing: 18, children: [
+          const Wrap(spacing: 17, runSpacing: 18, children: [
             PackageItem(
-              title: '10GB',
-              price: '10.000',
+              amount: 10,
+              price: 10000,
               isSelected: true,
             ),
             PackageItem(
-              title: '25GB',
-              price: '420.000',
+              amount: 25,
+              price: 420000,
             ),
             PackageItem(
-              title: '40GB',
-              price: '2.500.000',
+              amount: 40,
+              price: 2500000,
             ),
             PackageItem(
-              title: '99GB',
-              price: '5.000.000',
+              amount: 99,
+              price: 5000000,
             ),
           ]),
           const SizedBox(

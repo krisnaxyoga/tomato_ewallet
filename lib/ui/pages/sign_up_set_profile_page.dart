@@ -1,13 +1,26 @@
+import 'package:bank_sha/models/sign_up_form_model.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/button.dart';
 import 'package:bank_sha/ui/widgets/form.dart';
 import 'package:flutter/material.dart';
 
-class SignUpSetProfilePage extends StatelessWidget {
-  const SignUpSetProfilePage({super.key});
+class SignUpSetProfilePage extends StatefulWidget {
+  final SignUpFormModel data;
+
+  const SignUpSetProfilePage({
+    super.key,
+    required this.data,
+  });
 
   @override
+  State<SignUpSetProfilePage> createState() => _SignUpSetProfilePageState();
+}
+
+class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
+  final pinController = TextEditingController(text: '');
+  @override
   Widget build(BuildContext context) {
+    // print(data.toJson());
     return Scaffold(
       // backgroundColor: lightBackgoundColor,
       body: Center(
@@ -47,31 +60,31 @@ class SignUpSetProfilePage extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  // Container(
-                  //   width: 100,
-                  //   height: 100,
-                  //   decoration: BoxDecoration(
-                  //     shape: BoxShape.circle,
-                  //     color: lightBackgoundColor,
-                  //   ),
-                  //   child: Center(
-                  //     child: Image.asset(
-                  //       'assets/ic_upload.png',
-                  //       width: 32,
-                  //     ),
-                  //   ),
-                  // ),
                   Container(
                     width: 100,
                     height: 100,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/img_profile.png'),
+                      color: lightBackgoundColor,
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/ic_upload.png',
+                        width: 32,
                       ),
                     ),
                   ),
+                  // Container(
+                  //   width: 100,
+                  //   height: 100,
+                  //   decoration: const BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     image: DecorationImage(
+                  //       fit: BoxFit.cover,
+                  //       image: AssetImage('assets/img_profile.png'),
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 8,
                   ),
@@ -85,9 +98,10 @@ class SignUpSetProfilePage extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  const CustomsFormField(
+                  CustomsFormField(
                     title: 'Set PIN (6 digit number)',
                     obscureText: true,
+                    controller: pinController,
                   ),
                   const SizedBox(
                     height: 30,

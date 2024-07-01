@@ -1,13 +1,16 @@
+import 'dart:ffi';
+
+import 'package:bank_sha/shared/shared_method.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class PackageItem extends StatelessWidget {
-  final String title;
-  final String price;
+  final int amount;
+  final int price;
   final bool isSelected;
   const PackageItem({
     super.key,
-    required this.title,
+    required this.amount,
     required this.price,
     this.isSelected = false,
   });
@@ -31,14 +34,14 @@ class PackageItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              title,
+              '${amount}GB',
               style: blackTextStyle.copyWith(fontWeight: medium, fontSize: 32),
             ),
             const SizedBox(
               height: 6,
             ),
             Text(
-              'Rp $price',
+              formatCurrency(price),
               style: greyTextStyle.copyWith(
                 fontSize: 12,
               ),
