@@ -1,8 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:bank_sha/models/sign_up_form_model.dart';
+import 'package:bank_sha/shared/shared_method.dart';
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/pages/sign_up_set_ktp_page.dart';
 import 'package:bank_sha/ui/widgets/button.dart';
 import 'package:bank_sha/ui/widgets/form.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SignUpSetProfilePage extends StatefulWidget {
   final SignUpFormModel data;
@@ -18,6 +24,15 @@ class SignUpSetProfilePage extends StatefulWidget {
 
 class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
   final pinController = TextEditingController(text: '');
+  XFile? selectedImage;
+
+  bool validate() {
+    if (pinController.text.length != 6) {
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     // print(data.toJson());
@@ -60,31 +75,38 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
               ),
               child: Column(
                 children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: lightBackgoundColor,
-                    ),
-                    child: Center(
-                      child: Image.asset(
-                        'assets/ic_upload.png',
-                        width: 32,
+                  GestureDetector(
+                    onTap: () async {
+                      final image = await selectImage();
+                      setState(() {
+                        selectedImage = image;
+                      });
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: lightBackgoundColor,
+                        image: selectedImage == null
+                            ? null
+                            : DecorationImage(
+                                fit: BoxFit.cover,
+                                image: FileImage(
+                                  File(selectedImage!.path),
+                                ),
+                              ),
                       ),
+                      child: selectedImage != null
+                          ? null
+                          : Center(
+                              child: Image.asset(
+                                'assets/ic_upload.png',
+                                width: 32,
+                              ),
+                            ),
                     ),
                   ),
-                  // Container(
-                  //   width: 100,
-                  //   height: 100,
-                  //   decoration: const BoxDecoration(
-                  //     shape: BoxShape.circle,
-                  //     image: DecorationImage(
-                  //       fit: BoxFit.cover,
-                  //       image: AssetImage('assets/img_profile.png'),
-                  //     ),
-                  //   ),
-                  // ),
                   const SizedBox(
                     height: 8,
                   ),
@@ -102,6 +124,7 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
                     title: 'Set PIN (6 digit number)',
                     obscureText: true,
                     controller: pinController,
+                    keyboardType: TextInputType.number,
                   ),
                   const SizedBox(
                     height: 30,
@@ -109,7 +132,24 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
                   CustomsFilledButton(
                     title: 'Continue',
                     onPressed: () {
-                      Navigator.pushNamed(context, '/sign-up-set-ktp');
+                      if (validate()) {
+                        // Navigator.pushNamed(context, '/sign-up-set-ktp');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUpSetKtpPage(
+                              data: widget.data.copyWith(
+                                pin: pinController.text,
+                                profilePicture: selectedImage == null
+                                    ? null
+                                    : 'data:image/png;base64,${base64Encode(File(selectedImage!.path).readAsBytesSync())}',
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        showCustomSnackbar(context, 'pin must be 6 digit');
+                      }
                     },
                     height: 45,
                   ),

@@ -1,1 +1,1 @@
-String BaseUrl = 'https://bwabank.my.id/api';
+String baseUrl = 'https://bwabank.my.id/api';
