@@ -18,7 +18,7 @@ class UserService {
             'Authorization': token,
           });
 
-      print(token);
+      print('ini token: $token');
       if (res.statusCode != 200) {
         throw jsonDecode(res.body)['message'];
       }

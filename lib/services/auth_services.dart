@@ -74,6 +74,7 @@ class AuthService {
 
   Future<void> storeCredentialTolocal(UserModel user) async {
     try {
+      print(user);
       const storage = FlutterSecureStorage();
       await storage.write(key: 'token', value: user.token);
       await storage.write(key: 'email', value: user.email);
@@ -109,6 +110,7 @@ class AuthService {
     const storage = FlutterSecureStorage();
     String? value = await storage.read(key: 'token');
 
+    print('token $value');
     if (value != null) {
       token = 'Bearer ' + value;
     }

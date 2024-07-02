@@ -35,7 +35,7 @@ class UserModel {
         balance: json['balance'],
         cardNumber: json['card_number'],
         pin: json['pin'],
-        token: json['tokrn'],
+        token: json['token'],
       );
 
   UserModel copywith({
