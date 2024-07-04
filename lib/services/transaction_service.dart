@@ -71,15 +71,21 @@ class TransactionService {
     try {
       final token = await AuthService().getToken();
 
-      final res = await http.post(
-        Uri.parse('$baseUrl/data_plans'),
+      final res = await http.get(
+        Uri.parse('$baseUrl/transactions?limit=10'),
         headers: {
           'Authorization': token,
         },
       );
       if (res.statusCode == 200) {
-        throw jsonDecode(res.body)['message'];
+        return List<TransactionModel>.from(
+          jsonDecode(res.body)['data'].map(
+            (transaction) => TransactionModel.fromJson(transaction),
+          ),
+        ).toList();
       }
+
+      throw jsonDecode(res.body)['message'];
     } catch (e) {
       rethrow;
     }
