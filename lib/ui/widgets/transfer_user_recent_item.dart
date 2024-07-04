@@ -1,17 +1,12 @@
+import 'package:bank_sha/models/user_model.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class TransferUserRecentItem extends StatelessWidget {
-  final String name;
-  final String userName;
-  final String imgUrl;
-  final bool isVerified;
+  final UserModel user;
   const TransferUserRecentItem({
     super.key,
-    required this.name,
-    required this.userName,
-    required this.imgUrl,
-    this.isVerified = false,
+    required this.user,
   });
 
   @override
@@ -32,7 +27,9 @@ class TransferUserRecentItem extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage(imgUrl),
+                image: user.profilePicture == null
+                    ? const AssetImage('assets/img_profile.png')
+                    : NetworkImage(user.profilePicture!) as ImageProvider,
               ),
             ),
           ),
@@ -43,14 +40,14 @@ class TransferUserRecentItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                user.name.toString(),
                 style: blackTextStyle.copyWith(
                   fontWeight: medium,
                   fontSize: 16,
                 ),
               ),
               Text(
-                '@$userName',
+                '@${user.username}',
                 style: greyTextStyle.copyWith(
                   fontSize: 12,
                 ),
@@ -58,7 +55,7 @@ class TransferUserRecentItem extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          if (isVerified)
+          if (user.verified == 1)
             Row(
               children: [
                 Icon(

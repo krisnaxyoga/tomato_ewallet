@@ -1,17 +1,14 @@
+import 'package:bank_sha/models/user_model.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class TransferResultItem extends StatelessWidget {
-  final String name;
-  final String userName;
-  final String imageUrl;
-  final bool isVerified;
+  final UserModel user;
+  final bool isSelected;
   const TransferResultItem({
     super.key,
-    required this.imageUrl,
-    required this.name,
-    required this.userName,
-    this.isVerified = false,
+    required this.user,
+    this.isSelected = false,
   });
 
   @override
@@ -23,6 +20,10 @@ class TransferResultItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: whiteColor,
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: isSelected ? blueColor : whiteColor,
+          width: 2,
+        ),
       ),
       child: Column(
         children: [
@@ -32,12 +33,12 @@ class TransferResultItem extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage(
-                  imageUrl,
-                ),
+                image: user.profilePicture == null
+                    ? const AssetImage('assets/img_profile.png')
+                    : NetworkImage(user.profilePicture!) as ImageProvider,
               ),
             ),
-            child: isVerified
+            child: user.verified == 1
                 ? Align(
                     alignment: Alignment.topRight,
                     child: Container(
@@ -66,7 +67,7 @@ class TransferResultItem extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  name,
+                  user.name.toString(),
                   style: blackTextStyle.copyWith(
                     fontWeight: medium,
                     overflow: TextOverflow.ellipsis,
@@ -74,7 +75,7 @@ class TransferResultItem extends StatelessWidget {
                   maxLines: 2,
                 ),
                 Text(
-                  '@$userName',
+                  '@${user.username}',
                   style: greyTextStyle.copyWith(
                     fontWeight: medium,
                   ),
